@@ -1,35 +1,35 @@
-const Header = (props) => {
-  return <h1>{props.course}</h1>;
-};
+import { useState } from "react";
 
-const Part = (props) => {
+const Display = ({ prefix, counter }) => {
   return (
-    <p>
-      {props.partname} {props.exercises}
-    </p>
+    <div>
+      {prefix}
+      {counter}
+    </div>
   );
 };
 
-const Total = (props) => {
-  return <p>Number of exercises {props.exercises1 + props.exercises2 + props.exercises3}</p>;
-}
+const Button = (props) => {
+  console.log(props);
+  const { onClick, text } = props;
+  return <button onClick={onClick}>{text}</button>;
+};
+
+const History = (props) => {
+  if (props.allClicks.length === 0) {
+    return <div>the app is used by pressing the buttons</div>;
+  }
+  return <div>button press history: {props.allClicks.join(" ")}</div>;
+};
 
 const App = () => {
-  const course = "Half Stack application development";
-  const part1 = "Fundamentals of React";
-  const exercises1 = 10;
-  const part2 = "Using props to pass data";
-  const exercises2 = 7;
-  const part3 = "State of a component";
-  const exercises3 = 14;
+  const [value, setValue] = useState(10);
 
   return (
     <div>
-      <Header course={course} />
-      <Part partname={part1} exercises={exercises1} />
-      <Part partname={part2} exercises={exercises2} />
-      <Part partname={part3} exercises={exercises3} />
-      <Total exercises1={exercises1} exercises2={exercises2} exercises3={exercises3} />
+      {value}
+      <button onClick={() => setValue(0)}>reset to zero</button>
+      <button onClick={console.log("clicked the button")}>el buttone</button>
     </div>
   );
 };

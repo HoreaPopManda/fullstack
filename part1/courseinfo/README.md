@@ -1,7 +1,54 @@
 # History
 
-started 08.02.2026 14:00
+lesson 08.02.2026 14:00 -2h
 1h dev
+lesson 14.02.2026 14:00 - 15:40 - 1h:40
+lesson 15.02.2026 - 2h
+finsihed 1.b
+
+17.02.2026 https://react.dev/learn/state-as-a-snapshot - 1h
+
+19.02.2026 - https://fullstackopen.com/en/part1/a_more_complex_state_debugging_react_apps - Event Handling Revisited - 1h
+
+# to do
+
+“function factories”, “Object literal” and so on.
+
+do the exercises from https://react.dev/learn/ corresponding to part 1.b and 1.c
+
+# notes
+
+use debugger; in the code to stop the execution of the react code
+
+allClicks.concat('L') does not mutate the array but rather creates a new array
+
+allClicks.push('L') does mutate the array. don't use it to set the state
+
+it is forbidden in React to mutate state directly
+
+In practice { ...clicks } creates a new object that has copies of all of the properties of the clicks object.
+
+## UseState
+
+const [index, setIndex] = useState(0);
+
+I have a "storage somewhere" from where I serve you the value of a var of your choice (index)
+
+react:
+useState(0) => [varref, hookfunctionref]
+
+listen to hookfunctionref (newval) call reacthook (newval)
+
+reactFct (newvalue) {
+varref.value = newvalue
+rerender()
+}
+
+## Props
+
+<Display counter=2 name="test"/> means props = {counter:2, name:"test"}
+
+## What exactly is Strict Mode
 
 # React + Vite
 
