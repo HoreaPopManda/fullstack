@@ -10,6 +10,8 @@ finsihed 1.b
 
 19.02.2026 - https://fullstackopen.com/en/part1/a_more_complex_state_debugging_react_apps - Event Handling Revisited - 1h
 
+21.02.2026
+
 # to do
 
 “function factories”, “Object literal” and so on.
@@ -17,6 +19,12 @@ finsihed 1.b
 do the exercises from https://react.dev/learn/ corresponding to part 1.b and 1.c
 
 # notes
+
+allClicks.reduce((a, b) => a + b, 0) // sums up all the elements in the array
+
+initialize arrays new Array(10).fill(0)
+
+Do Not Define Components Within Components
 
 use debugger; in the code to stop the execution of the react code
 

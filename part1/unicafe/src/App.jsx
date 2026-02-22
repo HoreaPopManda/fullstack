@@ -12,13 +12,43 @@ const Button = (props) => <button onClick={props.onClick}>{props.text}</button>;
 
 // Do not define components inside another component
 
-const Statistics = (props) => (
-  <div>
-    <p> good = {props.good} </p>
-    <p> neutral = {props.neutral} </p>
-    <p> bad = {props.bad} </p>
-  </div>
-);
+const StatisticsLine = (props) => {
+  return (
+    <tr>
+      <td>{props.text}</td>
+      <td>{props.value}</td>
+    </tr>
+  );
+};
+
+const Statistics = (props) => {
+  if (props.good === 0 && props.neutral === 0 && props.bad === 0) {
+    return <div>No feedback given</div>;
+  }
+  return (
+    <table>
+      <StatisticsLine text="good" value={props.good} />
+      <StatisticsLine text="neutral" value={props.neutral} />
+      <StatisticsLine text="bad" value={props.bad} />
+      <StatisticsLine
+        text="all"
+        value={props.good + props.neutral + props.bad}
+      />
+      <StatisticsLine
+        text="average"
+        value={
+          (props.good - props.bad) / (props.good + props.neutral + props.bad)
+        }
+      />
+      <StatisticsLine
+        text="positive"
+        value={
+          (props.good / (props.good + props.neutral + props.bad)) * 100 + " %"
+        }
+      />
+    </table>
+  );
+};
 
 const App = () => {
   // save clicks of each button to its own state
