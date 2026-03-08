@@ -51,9 +51,9 @@ const PersonForm = ({ phoneBook, addPerson }) => {
         <div>
           name: <input onChange={onChangeName} value={newName} />
         </div>
-        <dinv>
+        <div>
           number: <input onChange={onChangeNumber} value={newNumber} />
-        </dinv>
+        </div>
         <div>
           <button type="submit" onClick={onClick}>
             add
