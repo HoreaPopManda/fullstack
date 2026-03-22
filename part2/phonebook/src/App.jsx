@@ -1,15 +1,20 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Persons from "./components/Persons";
 import PersonForm from "./components/PersonForm";
 import Filter from "./components/Filter";
+import axios from "axios";
 
 const App = () => {
-  const [phoneBook, setPhoneBook] = useState([
-    { name: "Arto Hellas", phone: "040-123456" },
-    { name: "John Coy", phone: "040-654321" },
-    { name: "Iliuta Curmezan", phone: "040-987654" },
-  ]);
+  const [persons, setPersons] = useState([]);
   const [filter, setFilter] = useState("");
+
+  useEffect(() => {
+    console.log("effect");
+    axios.get("http://localhost:3001/persons").then((response) => {
+      console.log("promise fulfilled");
+      setPersons(response.data);
+    });
+  }, []);
 
   const setFilterValue = (value) => {
     console.log("setfilter " + value);
@@ -18,7 +23,7 @@ const App = () => {
   };
 
   const addPerson = (person) => {
-    setPhoneBook(phoneBook.concat(person));
+    setPersons(persons.concat(person));
   };
 
   return (
@@ -26,9 +31,9 @@ const App = () => {
       <h2>Phonebook</h2>
       <Filter setFilterValue={setFilterValue} />
       <h3>Add a new</h3>
-      <PersonForm phoneBook={phoneBook} addPerson={addPerson} />
+      <PersonForm phoneBook={persons} addPerson={addPerson} />
       <h2>Numbers</h2>
-      <Persons phoneBook={phoneBook} filter={filter} />
+      <Persons phoneBook={persons} filter={filter} />
     </div>
   );
 };
