@@ -1,4 +1,4 @@
-const Persons = ({ phoneBook, filter }) => {
+const Persons = ({ phoneBook, filter, deletePerson }) => {
   return (
     <div>
       <ul>
@@ -6,7 +6,8 @@ const Persons = ({ phoneBook, filter }) => {
           (person) =>
             person.name.toLowerCase().includes(filter.toLowerCase()) && (
               <li key={crypto.randomUUID()}>
-                {person.name} {person.phone}
+                {person.name} {person.number}
+                <button onClick={() => deletePerson(person.id)}>delete</button>
               </li>
             ),
         )}

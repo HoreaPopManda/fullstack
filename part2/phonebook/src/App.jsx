@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import Persons from "./components/Persons";
 import PersonForm from "./components/PersonForm";
 import Filter from "./components/Filter";
-import axios from "axios";
+import personService from "./services/persons";
 
 const App = () => {
   const [persons, setPersons] = useState([]);
@@ -10,9 +10,9 @@ const App = () => {
 
   useEffect(() => {
     console.log("effect");
-    axios.get("http://localhost:3001/persons").then((response) => {
+    personService.getAll().then((initialPersons) => {
       console.log("promise fulfilled");
-      setPersons(response.data);
+      setPersons(initialPersons);
     });
   }, []);
 
@@ -23,7 +23,26 @@ const App = () => {
   };
 
   const addPerson = (person) => {
-    setPersons(persons.concat(person));
+    personService.create(person).then((returnedPerson) => {
+      setPersons(persons.concat(returnedPerson));
+    });
+  };
+
+  const deletePerson = (id) => {
+    const personToDelete = persons.find((person) => person.id === id);
+    if (window.confirm(`Do you want to delete ${personToDelete.name}?`)) {
+      personService.deletePerson(id).then(() => {
+        setPersons(persons.filter((person) => person.id !== id));
+      });
+    }
+  };
+
+  const updatePerson = (person) => {
+    personService.updatePerson(person).then((returnedPerson) => {
+      setPersons(
+        persons.map((p) => (p.id === returnedPerson.id ? returnedPerson : p)),
+      );
+    });
   };
 
   return (
@@ -31,9 +50,17 @@ const App = () => {
       <h2>Phonebook</h2>
       <Filter setFilterValue={setFilterValue} />
       <h3>Add a new</h3>
-      <PersonForm phoneBook={persons} addPerson={addPerson} />
+      <PersonForm
+        phoneBook={persons}
+        addPerson={addPerson}
+        updatePerson={updatePerson}
+      />
       <h2>Numbers</h2>
-      <Persons phoneBook={persons} filter={filter} />
+      <Persons
+        phoneBook={persons}
+        filter={filter}
+        deletePerson={deletePerson}
+      />
     </div>
   );
 };
