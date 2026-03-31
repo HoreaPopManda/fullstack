@@ -1,3 +1,4 @@
+import "./index.css";
 import ReactDOM from "react-dom/client";
 
 import App from "./App";
@@ -9,7 +10,7 @@ const root = ReactDOM.createRoot(document.getElementById("root"));
 const refresh = () => {
   root.render(
     <div>
-      <App/>
+      <App />
     </div>,
   );
 };
