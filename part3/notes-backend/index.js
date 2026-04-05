@@ -1,6 +1,8 @@
 const express = require('express')
 const app = express()
 
+const PORT = process.env.PORT || 3001
+
 app.use(express.json())
 
 let notes = [
@@ -66,7 +68,7 @@ app.post('/api/notes', (request, response) => {
 })
 
 app.get('/', (request, response) => {
-  response.send('<h1>Hello World!</h1>')
+  response.send(`<h1>Notes API, fullstack course part 3b. Port ${PORT} !</h1>`)
 })
 
 app.get('/api/notes', (request, response) => {
@@ -92,7 +94,7 @@ app.delete('/api/notes/:id', (request, response) => {
 
 
 
-const PORT = 3001
+
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`)
 })
