@@ -1,0 +1,62 @@
+{
+  "notes": [
+    {
+      "id": "3",
+      "content": "GET and POST are the most important methods of HTTP protocol",
+      "important": true
+    },
+    {
+      "id": "4",
+      "content": "Korea has the best food",
+      "important": true
+    },
+    {
+      "content": "Dildong square has the best restaurants",
+      "important": true,
+      "id": "9tArbvm1N7o"
+    },
+    {
+      "content": "Jinjiang fish market is scary",
+      "important": true,
+      "id": "cvT1NvMTPww",
+      "date": "2026-03-22T09:57:09.136Z"
+    },
+    {
+      "content": "a new note...",
+      "important": false,
+      "id": "pIWDsNLk2yw",
+      "date": "2026-03-22T10:50:15.947Z"
+    },
+    {
+      "content": "a new note...",
+      "important": false,
+      "id": "sNCyi8YYiBI",
+      "date": "2026-03-22T10:52:57.087Z"
+    },
+    {
+      "content": "a new note...",
+      "important": false,
+      "id": "qce752Z6n_Y",
+      "date": "2026-03-22T11:15:21.203Z"
+    },
+    {
+      "content": "",
+      "important": false,
+      "id": "AI2RRRp2POI",
+      "date": "2026-03-22T11:15:21.861Z"
+    },
+    {
+      "content": "test",
+      "important": false,
+      "id": "tKfpDTQWN_U",
+      "date": "2026-03-22T11:15:31.908Z"
+    },
+    {
+      "content": "a new note...",
+      "important": false,
+      "id": "81KVeppATcY",
+      "date": "2026-03-22T11:28:44.711Z"
+    }
+  ],
+  "$schema": "./node_modules/json-server/schema.json"
+}
