@@ -1,7 +1,7 @@
 const Filter = ({ setFilterValue }) => {
   return (
     <div>
-      countries with{" "}
+      names with{" "}
       <input onChange={(event) => setFilterValue(event.target.value)} />
     </div>
   );
