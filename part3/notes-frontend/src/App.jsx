@@ -11,9 +11,12 @@ const App = () => {
   const [errorMessage, setErrorMessage] = useState(null);
 
   const toggleImportanceOf = (id) => {
+    console.log("importance of ", id, " has been toggled");
+
     const note = notes.find((n) => n.id === id);
     const changedNote = { ...note, important: !note.important };
 
+    console.log("note to be updated", changedNote);
     noteService
       .update(id, changedNote)
       .then((returnedNote) => {

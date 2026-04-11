@@ -1,3 +1,6 @@
+//import { notes } from './index.js';
+const notes = require('./indexOriginal.js')
+
 const mongoose = require('mongoose')
 
 if (process.argv.length < 3) {
@@ -21,12 +24,19 @@ const noteSchema = new mongoose.Schema({
 const Note = mongoose.model('Note', noteSchema)
 
 
-const note = new Note({
-  content: 'Mongoose makes things easy for the devs',
-  important: true
-})
+async function saveNotes() {
+    for (const n of notes) {
+        console.log(`Adding note: ${n.content}`);
+        const oneNote = new Note(n);
+        
+        // Wait for this save to finish before moving to the next item
+        await oneNote.save();
+        console.log('note saved!');
+    }
 
-note.save().then(result => {
-  console.log('note saved!')
-  mongoose.connection.close()
-})
+    // Now that the loop is completely finished, close the connection
+    mongoose.connection.close();
+    console.log('All notes saved and connection closed.');
+}
+
+saveNotes();
