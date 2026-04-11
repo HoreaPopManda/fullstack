@@ -150,3 +150,6 @@ const PORT = process.env.PORT || 3001
 app.listen(PORT, () => {
   console.log(`Phonebook server running on port ${PORT}`)
 })
+
+// You must explicitly export what you want to share
+module.exports = persons;
