@@ -3,6 +3,7 @@ import Note from "./components/Note";
 import noteService from "./services/notes";
 import Notification from "./components/Notification";
 import Footer from "./components/Footer";
+import "./index.css";
 
 const App = () => {
   const [notes, setNotes] = useState(null);
@@ -110,7 +111,7 @@ const App = () => {
       </ul>
 
       <form onSubmit={addNote}>
-        <input value={newNote} onChange={handleNoteChange} />
+        <input value={newNote} onChange={handleNoteChange} className="note-input"/>
         <button type="submit">save</button>
       </form>
       <Footer />

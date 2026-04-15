@@ -1,3 +1,6 @@
+# Last wort
+In part 3.c, implemented MongoDB for notes and deployed on the internet.
+
 # Notes frontend
 
 This repository contains the frontend developed from part 2 onwards in the Full Stack course. The different stages of the application are saved in different branches.
