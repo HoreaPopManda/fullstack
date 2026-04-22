@@ -16,6 +16,10 @@ const create = newObject => {
   return request.then(response => response.data)
 }
 
+const createOrUpdateIfExists = newObject => {
+  return axios.post(baseUrl, newObject)
+}
+
 const updatePerson = (newObject) => {
   console.log(`${baseUrl}/${newObject.id}`);
 
@@ -29,4 +33,4 @@ const deletePerson = (id) => {
 }
 
 
-export default { getAll, getOne, create, updatePerson, deletePerson}
+export default { getAll, getOne, create, updatePerson, deletePerson, createOrUpdateIfExists}

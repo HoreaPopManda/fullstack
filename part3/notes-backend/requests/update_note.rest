@@ -1,7 +1,7 @@
-PUT http://localhost:3001/api/notes/69da35c13fbc56fd301f4453
+PUT http://localhost:3001/api/notes/69e76213539f015389bad8c9
 Content-Type: application/json
 
 {
-  "content": "nasty note",
-  "important": false
+  "content": "nasty note edited twice",
+  "important": true
 }

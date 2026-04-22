@@ -1,8 +1,13 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
-const PersonForm = ({ phoneBook, addPerson, updatePerson }) => {
+const PersonForm = ({ phoneBook, addPerson, updatePerson, pickedName, pickedNumber }) => {
   const [newName, setNewName] = useState("");
   const [newNumber, setNewNumber] = useState("");
+
+  useEffect(() => {
+      if (pickedName) setNewName(pickedName)
+      if (pickedNumber) setNewNumber(pickedNumber)
+  }, [pickedName, pickedNumber])
 
   const onChangeName = (event) => {
     // console.log(`Name: ${event.target.value}`);
@@ -31,7 +36,10 @@ const PersonForm = ({ phoneBook, addPerson, updatePerson }) => {
       return;
     }
 
-    const personAlreadyIn = phoneBook.find((p) => p.name === newName);
+    
+    // const personAlreadyIn = phoneBook.find((p) => p.name === newName);
+
+    let personAlreadyIn;
 
     if (personAlreadyIn) {
       if (
@@ -49,6 +57,7 @@ const PersonForm = ({ phoneBook, addPerson, updatePerson }) => {
         return;
       }
     } else {
+      // add will work like an update if the person already exists, so we don't need to check for duplicates here
       const newContact = { name: newName, number: newNumber };
       addPerson(newContact);
       setNewName("");

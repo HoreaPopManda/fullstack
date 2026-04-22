@@ -4,11 +4,20 @@ import PersonForm from "./components/PersonForm";
 import Filter from "./components/Filter";
 import personService from "./services/persons";
 import Notification from "./components/Notification";
+import RefreshPhoneBook from "./components/RefreshPhoneBook";
 
 const App = () => {
   const [persons, setPersons] = useState([]);
   const [filter, setFilter] = useState("");
   const [message, setMessage] = useState({ text: null, type: null });
+
+  const [pickedName, setPickedName] = useState("")
+  const [pickedNumber, setPickedNumber] = useState("")
+
+  const handlePicked = (newPickedName, newPickedNumber) => {
+    setPickedName(newPickedName)
+    setPickedNumber(newPickedNumber)
+  };
 
   useEffect(() => {
     console.log("effect");
@@ -25,12 +34,25 @@ const App = () => {
   };
 
   const addPerson = (person) => {
-    personService.create(person).then((returnedPerson) => {
-      setPersons(persons.concat(returnedPerson));
+    personService.createOrUpdateIfExists(person).then((response) => {
+      const returnedPerson = response.data;
+      console.log(`response.status when adding a person: ${response.status}`);
+      if (response.status === 200) {
+        setPersons(persons.concat(response.data));
 
-      setMessage({ text: `Added ${returnedPerson.name}`, type: "info" });
+        setMessage({ text: `Added ${returnedPerson.name}`, type: "info" });
+      } 
+      else if (response.status === 201) {
+          setPersons(
+            persons.map((p) => (p.id === returnedPerson.id ? returnedPerson : p)),
+          );
+          setMessage({ text: `Updated ${returnedPerson.name}`, type: "info" });
+      }
+      else {
+          setMessage({ text: `Failed to add or update ${returnedPerson.name}`, type: "error" });
+      }
 
-      setTimeout(() => {
+        setTimeout(() => {
         setMessage({ text: null, type: null });
       }, 5000);
     });
@@ -75,9 +97,23 @@ const App = () => {
     });
   };
 
+  const refreshPhoneBook = () => {
+    personService.getAll().then((initialPersons) => {
+      setPersons(initialPersons);
+    });
+  };
+
+
+  const pickPerson = (name, number) => {
+    personService.getAll().then((initialPersons) => {
+      setPersons(initialPersons);
+    });
+  };
+
   return (
     <div>
       <h2>Phonebook</h2>
+      <RefreshPhoneBook refreshPhoneBook={refreshPhoneBook} />
       <Notification message={message.text} type={message.type} />
       <Filter setFilterValue={setFilterValue} />
       <h3>Add a new</h3>
@@ -85,12 +121,15 @@ const App = () => {
         phoneBook={persons}
         addPerson={addPerson}
         updatePerson={updatePerson}
+        pickedName={pickedName}
+        pickedNumber={pickedNumber}
       />
       <h2>Numbers</h2>
       <Persons
         phoneBook={persons}
         filter={filter}
         deletePerson={deletePerson}
+        pickPerson={handlePicked}
       />
     </div>
   );
