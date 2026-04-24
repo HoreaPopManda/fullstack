@@ -11,8 +11,9 @@ const App = () => {
   const [filter, setFilter] = useState("");
   const [message, setMessage] = useState({ text: null, type: null });
 
-  const [pickedName, setPickedName] = useState("")
-  const [pickedNumber, setPickedNumber] = useState("")
+  const [pickedName, setPickedName] = useState("");
+  const [pickedNumber, setPickedNumber] = useState("");
+
 
   const handlePicked = (newPickedName, newPickedNumber) => {
     setPickedName(newPickedName)
@@ -25,7 +26,9 @@ const App = () => {
       console.log("promise fulfilled");
       setPersons(initialPersons);
     });
+
   }, []);
+
 
   const setFilterValue = (value) => {
     console.log("setfilter " + value);

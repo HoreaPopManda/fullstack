@@ -32,5 +32,9 @@ const deletePerson = (id) => {
   return request.then(response => response.data)
 }
 
+const getInfo = () => {
+  const request = axios.get('/info')
+  return request.then(response => response.data)
+}
 
-export default { getAll, getOne, create, updatePerson, deletePerson, createOrUpdateIfExists}
+export default { getAll, getOne, create, updatePerson, deletePerson, createOrUpdateIfExists, getInfo}
