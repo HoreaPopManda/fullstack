@@ -31,7 +31,7 @@ const PersonForm = ({ phoneBook, addPerson, updatePerson, pickedName, pickedNumb
     event.preventDefault();
 
     if (!isValidPhoneNumber(newNumber)) {
-      window.alert(`${newNumber} is not a valid phone number`);
+      window.alert(`<${newNumber}> is not a valid phone number`);
       setNewNumber("");
       return;
     }

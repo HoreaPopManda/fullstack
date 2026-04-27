@@ -37,7 +37,8 @@ const App = () => {
   };
 
   const addPerson = (person) => {
-    personService.createOrUpdateIfExists(person).then((response) => {
+    personService.createOrUpdateIfExists(person)
+    .then((response) => {
       const returnedPerson = response.data;
       console.log(`response.status when adding a person: ${response.status}`);
       if (response.status === 200) {
@@ -54,11 +55,20 @@ const App = () => {
       else {
           setMessage({ text: `Failed to add or update ${returnedPerson.name}`, type: "error" });
       }
-
-        setTimeout(() => {
+      setTimeout(() => {
         setMessage({ text: null, type: null });
-      }, 5000);
-    });
+        }, 5000);
+    })
+    .catch((error) => {
+        setMessage({
+          text: error.response.data.error || `Failed to update ${person.name}`,
+          type: "error",
+          });
+        
+        setTimeout(() => {
+          setMessage({ text: null, type: null });
+          }, 5000);
+    })
   };
 
   const deletePerson = (id) => {
@@ -88,16 +98,27 @@ const App = () => {
   };
 
   const updatePerson = (person) => {
-    personService.updatePerson(person).then((returnedPerson) => {
-      setPersons(
-        persons.map((p) => (p.id === returnedPerson.id ? returnedPerson : p)),
-      );
-      setMessage({ text: `Updated ${returnedPerson.name}`, type: "info" });
+    personService.updatePerson(person)
+      .then((returnedPerson) => {
+        setPersons(
+          persons.map((p) => (p.id === returnedPerson.id ? returnedPerson : p)),
+        );
+        setMessage({ text: `Updated ${returnedPerson.name}`, type: "info" });
 
-      setTimeout(() => {
-        setMessage({ text: null, type: null });
-      }, 5000);
-    });
+        setTimeout(() => {
+          setMessage({ text: null, type: null });
+        }, 5000);
+      })
+      .catch((error) => {
+        setMessage({
+          text: error.response.data.error || `Failed to update ${person.name}`,
+          type: "error",
+          });
+
+        setTimeout(() => {
+          setMessage({ text: null, type: null });
+          }, 5000);
+      })
   };
 
   const refreshPhoneBook = () => {
@@ -115,7 +136,7 @@ const App = () => {
 
   return (
     <div>
-      <h2>Phonebook</h2>
+      <h2>Phonebook {persons ? `(${persons.length})` : ""}</h2>
       <RefreshPhoneBook refreshPhoneBook={refreshPhoneBook} />
       <Notification message={message.text} type={message.type} />
       <Filter setFilterValue={setFilterValue} />
