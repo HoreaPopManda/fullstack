@@ -1,5 +1,5 @@
-import js from '@eslint/js'
 import globals from 'globals'
+import js from '@eslint/js'
 import stylisticJs from '@stylistic/eslint-plugin'
 
 export default [
@@ -7,7 +7,7 @@ export default [
   {
     files: ['**/*.js'],
     languageOptions: {
-      sourceType: 'module',
+      sourceType: 'commonjs',
       globals: { ...globals.node },
       ecmaVersion: 'latest',
     },

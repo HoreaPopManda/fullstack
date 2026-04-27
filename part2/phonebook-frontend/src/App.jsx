@@ -136,7 +136,7 @@ const App = () => {
 
   return (
     <div>
-      <h2>Phonebook {persons ? `(${persons.length})` : ""}</h2>
+      <h2>Phonebook {persons ? `(${persons.length})` : ""} linted </h2>
       <RefreshPhoneBook refreshPhoneBook={refreshPhoneBook} />
       <Notification message={message.text} type={message.type} />
       <Filter setFilterValue={setFilterValue} />

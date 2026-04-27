@@ -7,34 +7,34 @@ app.use(express.json())
 
 let notes = [
   {
-    id: "1",
-    content: "HTML is easy",
+    id: '1',
+    content: 'HTML is easy',
     important: true
   },
   {
-    id: "2",
-    content: "Browser can execute only JavaScript",
+    id: '2',
+    content: 'Browser can execute only JavaScript',
     important: false
   },
   {
-    id: "3",
-    content: "GET and POST are the most important methods of HTTP protocol",
+    id: '3',
+    content: 'GET and POST are the most important methods of HTTP protocol',
     important: true
   },
   {
-    id: "4",
-    content: "HTTPS is the secure version of HTTP",
+    id: '4',
+    content: 'HTTPS is the secure version of HTTP',
     important: true
   },
- {
-    id: "5",
-    content: "REST is an architectural style for designing APIs",
+  {
+    id: '5',
+    content: 'REST is an architectural style for designing APIs',
     important: true
   }
   ,
   {
-    id: "6",
-    content: "REST does GET, POST, PUT, DELETE and PATCH",
+    id: '6',
+    content: 'REST does GET, POST, PUT, DELETE and PATCH',
     important: true
   }
 ]
@@ -51,8 +51,8 @@ app.post('/api/notes', (request, response) => {
   const body = request.body
 
   if (!body.content) {
-    return response.status(400).json({ 
-      error: 'content missing' 
+    return response.status(400).json({
+      error: 'content missing'
     })
   }
 
@@ -76,20 +76,20 @@ app.get('/api/notes', (request, response) => {
 })
 
 app.get('/api/notes/:id', (request, response) => {
-    const id = request.params.id;
-    const note = notes.find(note => note.id === id);
-    if (note) {
-        response.json(note);
-    } else {
-        response.status(404).end();
-    }
+  const id = request.params.id
+  const note = notes.find(note => note.id === id)
+  if (note) {
+    response.json(note)
+  } else {
+    response.status(404).end()
+  }
 })
 
 app.delete('/api/notes/:id', (request, response) => {
-    const id = request.params.id;
-    notes = notes.filter(note => note.id !== id);
-    response.status(204).end();
-});
+  const id = request.params.id
+  notes = notes.filter(note => note.id !== id)
+  response.status(204).end()
+})
 
 
 
@@ -99,4 +99,4 @@ app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`)
 })
 
-module.exports = notes;
+module.exports = notes

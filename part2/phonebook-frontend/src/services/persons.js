@@ -6,7 +6,7 @@ const getAll = () => {
   return request.then(response => response.data)
 }
 
-const getOne = () => {
+const getOne = (id) => {
   const request = axios.get(`${baseUrl}/${id}`)
   return request.then(response => response.data)
 }
@@ -21,7 +21,7 @@ const createOrUpdateIfExists = newObject => {
 }
 
 const updatePerson = (newObject) => {
-  console.log(`${baseUrl}/${newObject.id}`);
+  console.log(`${baseUrl}/${newObject.id}`)
 
   const request = axios.put(`${baseUrl}/${newObject.id}`, newObject)
   return request.then(response => response.data)
@@ -37,4 +37,4 @@ const getInfo = () => {
   return request.then(response => response.data)
 }
 
-export default { getAll, getOne, create, updatePerson, deletePerson, createOrUpdateIfExists, getInfo}
+export default { getAll, getOne, create, updatePerson, deletePerson, createOrUpdateIfExists, getInfo }

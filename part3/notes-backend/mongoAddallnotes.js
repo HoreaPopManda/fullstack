@@ -25,18 +25,18 @@ const Note = mongoose.model('Note', noteSchema)
 
 
 async function saveNotes() {
-    for (const n of notes) {
-        console.log(`Adding note: ${n.content}`);
-        const oneNote = new Note(n);
-        
-        // Wait for this save to finish before moving to the next item
-        await oneNote.save();
-        console.log('note saved!');
-    }
+  for (const n of notes) {
+    console.log(`Adding note: ${n.content}`)
+    const oneNote = new Note(n)
 
-    // Now that the loop is completely finished, close the connection
-    mongoose.connection.close();
-    console.log('All notes saved and connection closed.');
+    // Wait for this save to finish before moving to the next item
+    await oneNote.save()
+    console.log('note saved!')
+  }
+
+  // Now that the loop is completely finished, close the connection
+  mongoose.connection.close()
+  console.log('All notes saved and connection closed.')
 }
 
-saveNotes();
+saveNotes()

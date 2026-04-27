@@ -9,14 +9,14 @@ const app = express()
 app.use(express.json())
 app.use(express.static('dist'))
 
-
+/*
 const generateId = () => {
   const maxId = notes.length > 0
     ? Math.max(...notes.map(n => Number(n.id)))
     : 0
   return String(maxId + 1)
 }
-
+*/
 app.get('/', (request, response) => {
   response.send(`<h1>Notes API, fullstack course part 3c. Port ${PORT} !</h1>`)
 })
@@ -27,8 +27,8 @@ app.post('/api/notes', (request, response) => {
   const body = request.body
 
   if (!body.content) {
-    return response.status(400).json({ 
-      error: 'content missing' 
+    return response.status(400).json({
+      error: 'content missing'
     })
   }
 
@@ -73,24 +73,24 @@ app.get('/api/notes', (request, response) => {
 
 app.get('/api/notes/:id', (request, response, next) => {
   Note.findById(request.params.id)
-  .then(note => {
-    if (note) {
+    .then(note => {
+      if (note) {
         response.json(note)
       } else {
         response.status(404).end()
       }
-  })
-  .catch(error => next(error))
+    })
+    .catch(error => next(error))
 })
 
 //////// delete a note
 app.delete('/api/notes/:id', (request, response, next) => {
-    const id = request.params.id;
-    Note.findByIdAndDelete(id).then(() => {
-        response.status(204).end();
-    })
+  const id = request.params.id
+  Note.findByIdAndDelete(id).then(() => {
+    response.status(204).end()
+  })
     .catch(error => next(error))
-});
+})
 
 const unknownEndpoint = (request, response) => {
   console.error(request.path) // writes at the terminal, same place where console.log() writes
