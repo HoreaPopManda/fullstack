@@ -30,11 +30,13 @@ const PersonForm = ({ phoneBook, addPerson, updatePerson, pickedName, pickedNumb
   const onClick = (event) => {
     event.preventDefault();
 
+    /* validation moved on the backend, so we can remove this check for empty fields
     if (!isValidPhoneNumber(newNumber)) {
       window.alert(`<${newNumber}> is not a valid phone number`);
       setNewNumber("");
       return;
     }
+    */
 
     
     // const personAlreadyIn = phoneBook.find((p) => p.name === newName);

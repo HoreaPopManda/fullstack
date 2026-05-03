@@ -155,6 +155,10 @@ const App = () => {
         deletePerson={deletePerson}
         pickPerson={handlePicked}
       />
+      <footer style={{ marginTop: '20px', fontSize: '0.8rem', color: 'gray' }}>
+        UI last built on: {__BUILD_DATE__}
+      </footer>
+
     </div>
   );
 };

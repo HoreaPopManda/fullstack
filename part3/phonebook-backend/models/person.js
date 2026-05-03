@@ -19,7 +19,14 @@ const personSchema = new mongoose.Schema({
   name:  {
     type: String,
     minlength: 3,
-    required: true
+    required: true,
+    validate: {
+      validator: function(v) {
+        // 1. Check if total length is 3 or more
+        if (v.length < 3) return false
+      },
+      message: props => `${props.value} is not a valid name. It must be at least 3 characters long.`
+    }
   },
   number: {
     type: String,
