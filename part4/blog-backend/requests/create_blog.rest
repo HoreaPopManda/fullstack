@@ -1,0 +1,9 @@
+POST http://localhost:3001/api/blogs 
+Content-Type: application/json
+
+{
+  "title": "Asteptand in Ghermana",
+  "author": "Danut Ungureanu",
+  "url": "https://AiG.com",
+  "likes": 9
+}

@@ -1,6 +1,8 @@
 # H1 Timesheet
 
 ...
+17.05.26 Part 4a  Backend structure         21:45 - 22:45 - 1h
+03.05.26 Part 4a  Backend structure         19:00 - 22:26 - 3.5h
 26.06.26 Part 3d  Lint                      18:40 - 21:52 - 3h
 25.04.26 Part 3d  Exercise 3.21             21:30 - 23:16 - 2h
 24.04.26 Part 3d  Exercise 3.19 - 3.21      20:30 - 21:30 - 1h

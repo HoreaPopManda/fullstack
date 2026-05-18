@@ -23,7 +23,7 @@ const App = () => {
       .then((returnedNote) => {
         setNotes(notes.map((note) => (note.id === id ? returnedNote : note)));
       })
-      .catch((error) => {
+      .catch(() => {
         setErrorMessage(
           `Note '${note.content}' was already removed from server`,
         );
@@ -73,7 +73,7 @@ const App = () => {
         console.log("note deleted", returnedNote);
         setNotes(notes.filter((n) => n.id !== id));
       })
-      .catch((error) => {
+      .catch(() => {
         alert(`the note '${note.content}' was already deleted from server`);
         setNotes(notes.filter((n) => n.id !== id));
       });

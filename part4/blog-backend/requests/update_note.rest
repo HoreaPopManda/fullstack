@@ -1,0 +1,9 @@
+PUT http://localhost:3001/api/blogs/6a0b046b6178863a7f3f1568
+Content-Type: application/json
+
+{
+  "title": "Mars Chronicles",
+  "author": "Ray Bradbury",
+  "url": "https://MC.com",
+  "likes": 10
+}

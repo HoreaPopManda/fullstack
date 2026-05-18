@@ -12,4 +12,7 @@ export default defineConfig({
       },
     }
   },
+  define: {
+    __BUILD_DATE__: JSON.stringify(new Date().toLocaleString())
+  },
 })

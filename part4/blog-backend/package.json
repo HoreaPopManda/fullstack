@@ -1,29 +1,29 @@
 {
-  "name": "backend",
-  "version": "0.0.1",
-  "description": "",
+  "name": "blog-backend",
+  "version": "1.0.0",
+  "description": "Part 4 fullstack course, blog project",
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
     "dev": "node --watch index.js",
-    "test": "echo \\\"Error:npm  no test specified\\\" && exit 1",
-    "build:ui": "rm -rf dist && cd ../notes-frontend && npm run build && cp -r dist ../notes-backend/dist",
+    "test": "node --test",
+    "build:ui": "rm -rf dist && cd ../blog-frontend && npm run build && cp -r dist ../blog-backend/dist",
     "deploy:full": "npm run build:ui && git add . && git commit -m uibuild && git push",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix"
   },
-  "author": "horea pop manda",
+  "author": "Horea POP MANDA",
   "license": "MIT",
   "dependencies": {
     "cors": "^2.8.6",
     "dotenv": "^17.4.2",
     "express": "^5.2.1",
-    "mongoose": "^9.4.1"
+    "mongoose": "^9.6.2"
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",
     "@stylistic/eslint-plugin": "^5.10.0",
-    "eslint": "^10.2.1",
-    "globals": "^17.5.0"
+    "eslint": "^10.4.0",
+    "globals": "^17.6.0"
   }
 }

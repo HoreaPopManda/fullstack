@@ -37,4 +37,4 @@ const getAll = () => {
 }
 
 
-export default { getAll, create, update, deleteNote}
+export default { getAll, create, update, deleteNote, getAllOK}
