@@ -1,9 +1,13 @@
+const blue  = require('./helper').logColorBlue
+const magenta  = require('./helper').logColorMagenta
+const red  = require('./helper').logColorRed
+
 const info = (...params) => {
-  console.log(...params)
+  console.log(blue, ...params)
 }
 
 const error = (...params) => {
-  console.error(...params) // writes at the terminal, same place where console.log() writes
+  console.error(red, ...params) // writes at the terminal, same place where console.log() writes
 }
 
 module.exports = { info, error }

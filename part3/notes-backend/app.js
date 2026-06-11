@@ -7,15 +7,15 @@ const notesRouter = require('./controllers/notes')
 
 const app = express()
 
-logger.info('4.0 connecting to', config.MONGODB_URI)
+logger.info(`${config.COURSE_PART} - Connecting to MongoDB: ${config.MONGODB_URI}`)
 
 mongoose
   .connect(config.MONGODB_URI, { family: 4 })
   .then(() => {
-    logger.info('4.0 connected to MongoDB')
+    logger.info(`${config.COURSE_PART} - Connected to MongoDB`)
   })
   .catch((error) => {
-    logger.error('4.0 error connection to MongoDB:', error.message)
+    logger.error(`${config.COURSE_PART} - Error connecting to MongoDB:`, error.message)
   })
 
 app.use(express.static('dist'))
