@@ -13,15 +13,25 @@ const magenta  = require('../utils/helper').logColorMagenta
 
 before(() => console.log(magenta, 'about to run some test. supertest loads the app.js file and starts the server.'))
 
+/*
 beforeEach(async () => {
   await Note.deleteMany({})
 
-  let noteObject = new Note(helper.initialNotes[0])
-  await noteObject.save()
-
-  noteObject = new Note(helper.initialNotes[1])
-  await noteObject.save()
+  const noteObjects = helper.initialNotes
+    .map(note => new Note(note))
+  const promiseArray = noteObjects.map(note => note.save())
+  await Promise.all(promiseArray)
 })
+*/
+
+beforeEach(async () => {
+  console.log(magenta, 'before each test')
+  await Note.deleteMany({})
+  console.log(magenta, 'deleted')
+  await Note.insertMany(helper.initialNotes)
+  console.log(magenta, 'inserted')
+})
+
 
 test('notes are returned as json', async () => {
   await api
@@ -46,7 +56,7 @@ test('a specific note is within the returned notes', async () => {
   assert(contents.includes('HTML is easy'), true)
 })
 
-test.only('a valid note can be added ', async () => {
+test('a valid note can be added ', async () => {
   const newNote = {
     content: 'async/await simplifies making async calls',
     important: true,
@@ -80,6 +90,7 @@ test.only('note without content is not added', async () => {
 
   assert.strictEqual(notesAtEnd.length, helper.initialNotes.length)
 })
+
 
 test('a specific note can be viewed', async () => {
   const notesAtStart = await helper.notesInDb()
