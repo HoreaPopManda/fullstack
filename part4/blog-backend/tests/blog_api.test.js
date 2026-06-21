@@ -1,10 +1,10 @@
-const { test, after } = require('node:test')
+const { test, after, describe } = require('node:test')
 const assert = require('node:assert')
 const mongoose = require('mongoose')
 const supertest = require('supertest')
 const app = require('../app')
 const info = require('../utils/logger').info
-const trace = require('../utils/logger').trace
+const trace = require('../utils/logger').traceTest
 
 
 const api = supertest(app)
@@ -14,6 +14,7 @@ test('invalid blog API path', async () => {
     .get('/api/blog-invalid')
     .expect(404)
 })
+
 
 
 test('blogs are returned as json. expect 8 in the test db', async () => {
@@ -38,7 +39,7 @@ test('get single blog and test it has the id', async () => {
 
 
 
-test('add and delete right after', async () => {
+test('add, update and delete right after', async () => {
   const newBlog = {
     title: 'Test Blog',
     author: 'Test Author',
@@ -67,31 +68,18 @@ test('add and delete right after', async () => {
     .expect('Content-Type', /application\/json/)
     .expect(res => { assert.strictEqual(res.body.title, 'Updated Test Blog')})
 
+
   await api
-    .delete(`/api/blogs/${id}`)
-    .expect(204)
+    .put(`/api/blogs/${id}`)
+    .send({ ...newBlog, likes: 78 })
+    .expect(200)
 
-})
-
-
-test.only('test likes defaults to 0 ', async () => {
-  const newBlog = {
-    title: 'Test Zero likes',
-    author: 'Test Author',
-    url: 'https://example.com/testZeroLikes',
-  }
-
-  const resWithID = await api
-    .post('/api/blogs')
-    .send(newBlog)
+  await api
+    .get(`/api/blogs/${id}`)
     .expect(200)
     .expect('Content-Type', /application\/json/)
+    .expect(res => { assert.strictEqual(res.body.likes, 78) })
 
-  // trace (resWithID.body)
-
-  const id = resWithID.body.id
-
-  assert.strictEqual(resWithID.body.likes, 0)
 
   await api
     .delete(`/api/blogs/${id}`)
@@ -99,30 +87,58 @@ test.only('test likes defaults to 0 ', async () => {
 
 })
 
+describe('validity tests', () => {
 
-test('test missing data ', async () => {
-  const newBlogNoTitle = {
-    author: 'Test Author',
-    url: 'https://example.com/testZeroLikes',
-  }
+  test('test likes defaults to 0 ', async () => {
+    const newBlog = {
+      title: 'Test Zero likes',
+      author: 'Test Author',
+      url: 'https://example.com/testZeroLikes',
+    }
 
-  await api
-    .post('/api/blogs')
-    .send(newBlogNoTitle)
-    .expect(400)
+    const resWithID = await api
+      .post('/api/blogs')
+      .send(newBlog)
+      .expect(200)
+      .expect('Content-Type', /application\/json/)
+
+    // trace (resWithID.body)
+
+    const id = resWithID.body.id
+
+    assert.strictEqual(resWithID.body.likes, 0)
+
+    await api
+      .delete(`/api/blogs/${id}`)
+      .expect(204)
+
+  })
 
 
-  const newBlogNoUrl = {
-    title: 'Test Blog',
-    author: 'Test Author',
-  }
+  test('test missing data ', async () => {
+    const newBlogNoTitle = {
+      author: 'Test Author',
+      url: 'https://example.com/testZeroLikes',
+    }
 
-  await api
-    .post('/api/blogs')
-    .send(newBlogNoUrl)
-    .expect(400)
+    await api
+      .post('/api/blogs')
+      .send(newBlogNoTitle)
+      .expect(400)
+
+
+    const newBlogNoUrl = {
+      title: 'Test Blog',
+      author: 'Test Author',
+    }
+
+    await api
+      .post('/api/blogs')
+      .send(newBlogNoUrl)
+      .expect(400)
+  })
+
 })
-
 
 after(async () => {
   await mongoose.connection.close()
