@@ -2,8 +2,8 @@ POST http://localhost:3001/api/blogs
 Content-Type: application/json
 
 {
-  "title": "Asteptand in Ghermana",
-  "author": "Danut Ungureanu",
-  "url": "https://AiG.com",
+  "title": "451 Forwarded: The Future of Web Development",
+  "author": "Horea Tiganas",
+  "url": "https://ht.com",
   "likes": 9
 }
