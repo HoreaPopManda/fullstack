@@ -2,6 +2,8 @@
 
 ...
 
+21.06.26 Part 4b finished exercises 4.13.-4.14  20:10 22:40 2.5h
+
 20.06.26 Part 4b work on 4.8: Blog List Tests, step 1 21:05 23:35 2h 
 
 14.06.26 Part 4b undestand asynch/await 21:20 22:20 1h
